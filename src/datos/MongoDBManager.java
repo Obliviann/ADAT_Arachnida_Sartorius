@@ -11,7 +11,7 @@ import com.mongodb.BasicDBObject;
 import view.MongoMenu;
 
 
-public class MongoDBManager {
+public class MongoDBManager implements AccesoDatos{
 	
 	private MongoClient mongoCli;
 	private MongoDatabase db;
@@ -19,12 +19,12 @@ public class MongoDBManager {
 	
 	public MongoDBManager() {
 		System.out.println("---ACCESO A DATOS MONGODB---");
-		connectToDB();
+		connectDB();
 		MongoMenu.show();
 		MongoMenu.selectOption();
 	}
 
-	public void connectToDB() {
+	public void connectDB() {
 		mongoCli = new MongoClient();
 		db = mongoCli.getDatabase("arachnida");
 		System.out.println("Connected to db "+db.getName());
@@ -66,10 +66,7 @@ public class MongoDBManager {
 		
 	}
 	
-	public void exitMongo() {
+	public void disconnectDB() {
 		mongoCli.close();
 	}
-	
-	
-	//
 }
