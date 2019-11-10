@@ -15,14 +15,15 @@ public class Start {
 		} while (on);
 	}
 
+	static MongoDBManager m;
 
 	public boolean selectOption() {
 		boolean terminalOn = true;
-		//TODO: add letter input possibility
+		// TODO: add letter input possibility
 		switch (new Scanner(System.in).nextInt()) {
-		
+
 		case 1:
-			MongoDBManager mongo = new MongoDBManager();
+			m = new MongoDBManager();
 			break;
 //		case 2:
 //			
@@ -41,16 +42,17 @@ public class Start {
 			break;
 		default:
 			System.out.println("Please write one of the numbers above");
-			//this.selectOption();
+			// this.selectOption();
 		}
-		return terminalOn;	
+		return terminalOn;
 	}
-	
+
 	private boolean exit() {
 		System.out.print("Are you sure you want to exit? (Y/N) : ");
 		String input = new Scanner(System.in).nextLine();
-		//will only return false if Y is written
+		// will only return false if Y is written
 		return (input.toUpperCase().charAt(0) != 'Y');
 	}
-	
+
+
 }

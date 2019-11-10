@@ -1,6 +1,9 @@
 package datos;
 
+import java.util.Scanner;
+
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
@@ -21,7 +24,7 @@ public class MongoDBManager implements AccesoDatos{
 		System.out.println("---ACCESO A DATOS MONGODB---");
 		connectDB();
 		MongoMenu.show();
-		MongoMenu.selectOption();
+		this.selectMongoOption();
 	}
 
 	public void connectDB() {
@@ -43,15 +46,22 @@ public class MongoDBManager implements AccesoDatos{
 	}
 	
 	public void addOne() {
-		Document document = new Document("nombreColor", "negro").append("valorHexadec", "tuViella");	 
+		Document document = new Document("id", "9").append("subordo", "tuViella");	 
 		coll.insertOne(document);
 		System.out.println("Document inserted successfully...");
 	}
 	
 	public void searchOne() {
-		Document searchQuery = new Document();
-		System.out.println("Type filter search: ");
-		searchQuery.put("name", "Jaime"); //same as BasicDBObject searchQuery = new BasicDBObject().append("name", "Olivia");
+		System.out.println("Type filter search by family: ");
+		String input = new Scanner(System.in).nextLine();
+		Document searchQuery = new Document("familia",input);
+		//searchQuery.put("familia", "Thomisidae"); //same as BasicDBObject searchQuery = new BasicDBObject().append("name", "Olivia");
+		MongoCursor<Document> it = coll.find(searchQuery).iterator();
+		//int i = 1;
+	    while (it.hasNext()) {
+	    	System.out.println(it.next());
+	    	//i++; 
+	    }
 	}
 	
 	public void updateOne() {
@@ -67,6 +77,37 @@ public class MongoDBManager implements AccesoDatos{
 	}
 	
 	public void disconnectDB() {
+		System.out.println("Disconnecting from MongoDB");
 		mongoCli.close();
+	}
+	
+
+	public void selectMongoOption() {
+		switch (new Scanner(System.in).nextInt()) {
+
+		case 1:
+			// NullPointerException??
+			showAll();
+			break;
+		case 2:
+			addOne();
+			break;
+		case 3:
+			searchOne();
+			break;
+		case 4:
+			updateOne();
+			break;
+		case 5:
+			eliminateOne();
+			break;
+		case 6:
+			dropCollection();
+			break;
+		case 0:
+
+			break;
+		}
+
 	}
 }

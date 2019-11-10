@@ -5,8 +5,8 @@ import java.util.Scanner;
 import datos.MongoDBManager;
 
 public class MongoMenu {
-	//NullPointerException
-	static MongoDBManager m = new MongoDBManager();
+	static //NullPointerException
+	MongoDBManager m = new MongoDBManager();
 
 	public static void show() {
 		
@@ -20,34 +20,6 @@ public class MongoMenu {
 		System.out.println("    6.- ELIMINAR TODOS");
 		System.out.println("    0.- SALIR");
 
-	}
-	public static void selectOption() {	
-		
-		switch(new Scanner(System.in).nextInt()) {
-		
-		case 1:
-			//NullPointerException??
-			m.showAll();
-			break;
-		case 2:
-			m.addOne();
-			break;
-		case 3:
-			m.searchOne();
-			break;
-		case 4:
-			m.updateOne();
-			break;
-		case 5:
-			m.eliminateOne();
-			break;
-		case 6:
-			m.dropCollection();
-			break;
-		case 0:
-			
-			break;		
-		}
-	}
+	}	
 
 }
